@@ -1,4 +1,4 @@
-const CACHE_NAME = 'german-time-v3';
+const CACHE_NAME = 'german-time-v4';
 const ASSETS = [
     './',
     './index.html',
