@@ -1,50 +1,98 @@
-<div style="color: #e0e0e0; font-family: 'Segoe UI', sans-serif; line-height: 1.6; padding: 10px;">
-    <h2 style="color: #FF3131; border-bottom: 1px solid #444; padding-bottom: 5px;">German Time Guide</h2>
-    
-    <h3 style="color: #03dac6;">1. The "Half" Rule (Crucial!)</h3>
-    <p>In English, we say "half past ten" (looking back). In German, you look <b>forward</b> to the next hour. <i>Halb</i> means you are halfway to the next hour.</p>
-    
-    <div style="background: #1e1e1e; padding: 15px; border-radius: 8px; border-left: 4px solid #FF3131; margin: 10px 0;">
-        <b style="color: #FF3131;">Example:</b> 10:30 is <b>"halb elf"</b> (halfway to eleven).
-    </div>
+<style>
+    #help-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 0.9rem;
+        text-align: center;
+    }
 
-    
+    #help-content th {
+        background-color: transparent;
+        border-bottom: 2px solid var(--germany-gold); /* Using the Flag Gold */
+        padding: 12px;
+        text-align: center;
+    }
 
-    <h3 style="color: #03dac6;">2. Casual vs. Formal</h3>
-    <p>The app defaults to <b>Casual</b> mode on startup. Here is how they differ:</p>
-    
-    <table style="width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.9rem;">
+    #help-content td {
+        padding: 10px;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+        text-align: center;
+    }
+
+    /* Grammar Colors */
+    .cardinal-num { color: #3498db; font-weight: bold; } /* Blue for Minutes */
+    .nom-case { color: var(--nom-color); font-weight: bold; } /* Orange for Hours */
+    .flag-logic { font-style: italic; opacity: 0.8; font-size: 0.8rem; }
+</style>
+
+<div class="help-sect">
+    <h3>📱 How to Use</h3>
+    <ul>
+        <li><b>The Flag Face:</b> The clock is the German Flag. ⬛ Black (Top), 🟥 Red (Middle), 🟨 Gold (Bottom).</li>
+        <li><b>Drag the Hands:</b> Move hands to change time. German logic updates automatically.</li>
+        <li><b>Startup Mode:</b> Casual mode is active by default.</li>
+        <li><b>Meeting Button:</b> Shows formal time by default (e.g., "Es ist vierzehn Uhr...").</li>
+        <li><b>Quiz Mode:</b> Pick the correct German phrase. <span style="color:#28a745">Green</span> is correct, <span style="color:#dc3545">Red</span> is wrong.</li>
+    </ul>
+</div>
+
+<div class="help-sect">
+    <h3>👔 <span class="nom-case">Formal</span> Grammar (24h)</h3>
+    <p>Used for schedules, radio, and airports. Very simple: <b>Hour + "Uhr" + Minutes</b>.</p>
+    <table class="help-table">
         <thead>
-            <tr style="border-bottom: 2px solid #444; color: #FF3131;">
-                <th style="padding: 8px; text-align: left;">Feature</th>
-                <th style="padding: 8px; text-align: left;">Casual (12h)</th>
-                <th style="padding: 8px; text-align: left;">Formal (24h)</th>
+            <tr>
+                <th>Time</th>
+                <th>German Format</th>
+                <th>Literal Translation</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td style="padding: 8px; border-bottom: 1px solid #333;">Structure</td>
-                <td style="padding: 8px; border-bottom: 1px solid #333;">Minutes + vor/nach + Hour</td>
-                <td style="padding: 8px; border-bottom: 1px solid #333;">Hour + "Uhr" + Minutes</td>
+                <td>14:10</td>
+                <td><span class="nom-case">vierzehn</span> Uhr <span class="cardinal-num">zehn</span></td>
+                <td>14 o'clock 10</td>
             </tr>
             <tr>
-                <td style="padding: 8px; border-bottom: 1px solid #333;">Example (14:10)</td>
-                <td style="padding: 8px; border-bottom: 1px solid #333;">zehn nach zwei</td>
-                <td style="padding: 8px; border-bottom: 1px solid #333;">vierzehn Uhr zehn</td>
+                <td>08:45</td>
+                <td><span class="nom-case">acht</span> Uhr <span class="cardinal-num">fünfundvierzig</span></td>
+                <td>8 o'clock 45</td>
             </tr>
         </tbody>
     </table>
+</div>
 
-    <h3 style="color: #03dac6;">3. Cardinal Numbers Only</h3>
-    <p>Per your learning preferences, we do not use "Viertel" (quarters). We use exact cardinal minutes:</p>
-    <ul>
-        <li><span style="color: #03dac6;">fünfzehn</span> (15)</li>
-        <li><span style="color: #03dac6;">fünfundvierzig</span> (45)</li>
-    </ul>
-
-    
-
-    <p style="font-size: 0.8rem; color: #888; margin-top: 20px;">
-        <i>Tip: The second hand will continue to tick even after you manually adjust the time!</i>
+<div class="help-sect">
+    <h3>☕ <span class="nom-case">Casual</span> Grammar (12h)</h3>
+    <p>Daily conversation. Just like Polish, German "looks forward" to the next hour at the half-hour mark.</p>
+    <table class="help-table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>German Phrase</th>
+                <th>English / Polish Logic</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>Nach</b> (Past)</td>
+                <td><span class="cardinal-num">zehn</span> <b>nach</b> <span class="nom-case">vier</span></td>
+                <td>10 past 4</td>
+            </tr>
+            <tr>
+                <td><b>Halb</b> (Half)</td>
+                <td><b>halb</b> <span class="nom-case">fünf</span></td>
+                <td>Halfway to 5 <br><span class="flag-logic">(Polish: wpół do piątej)</span></td>
+            </tr>
+            <tr>
+                <td><b>Vor</b> (To)</td>
+                <td><span class="cardinal-num">zehn</span> <b>vor</b> <span class="nom-case">fünf</span></td>
+                <td>10 to 5</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+        <small>*Note: We strictly use <b>cardinal</b> numbers. We say <b class="cardinal-num">fünfzehn</b> (15) instead of quarters [cite: 2026-01-10].</small>
     </p>
 </div>
