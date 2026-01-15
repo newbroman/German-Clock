@@ -1,4 +1,4 @@
-const CACHE_NAME = 'german-time-v1';
+const CACHE_NAME = 'german-time-v2';
 const ASSETS = [
     './',
     './index.html',
