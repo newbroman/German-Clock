@@ -2,6 +2,12 @@
  * German Time Learner for English Speakers
  */
 
+let currentLang = 'EN';
+const dict = {
+    'EN': { qOff: "How do you say?", qOn: "Show Answer" },
+    'DE': { qOff: "Wie sagt man?", qOn: "Antwort zeigen" }
+};
+
 // 1. Data Sets
 const hDe = ["Mitternacht", "eins", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn", "zwanzig", "einundzwanzig", "zweiundzwanzig", "dreiundzwanzig"];
 const mDe = ["null", "eins", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn", "zwanzig", "einundzwanzig", "zweiundzwanzig", "dreiundzwanzig", "vierundzwanzig", "fünfundzwanzig", "sechsundzwanzig", "siebenundzwanzig", "achtundzwanzig", "neunundzwanzig", "dreißig"];
@@ -140,4 +146,99 @@ function init() {
             updateDisplay(false);
         }
     }, 1000);
+}
+
+function setRealTime() {
+    isLive = true;
+    const now = new Date();
+    hours = now.getHours();
+    minutes = now.getMinutes();
+    seconds = now.getSeconds();
+    updateDisplay(true);
+}
+
+function rollTime() {
+    isLive = false;
+    hours = Math.floor(Math.random() * 24);
+    minutes = Math.floor(Math.random() * 60);
+    seconds = 0;
+    if (isQuiz) isRevealed = false; // Hide answer for new random time
+    updateDisplay(true);
+}
+
+function toggleQuiz() {
+    isQuiz = !isQuiz;
+    isRevealed = !isQuiz; // If entering quiz, hide answer; if leaving, show it
+    
+    const d = dict[currentLang];
+    const btn = document.getElementById('quiz-toggle');
+    
+    // Toggle button text based on state [cite: 2026-01-08]
+    if (isQuiz) {
+        btn.innerText = d.qOn; // "Show Answer"
+    } else {
+        btn.innerText = d.qOff; // "How do you say?" (Formal default)
+    }
+    
+    updateDisplay(true);
+}
+
+// Manual Drag Support
+function startDrag(e) {
+    isLive = false;
+    document.onmousemove = handleDrag;
+    document.ontouchmove = handleDrag;
+    document.onmouseup = stopDrag;
+    document.ontouchend = stopDrag;
+}
+
+function handleDrag(e) {
+    const clock = document.getElementById('clock-container');
+    const rect = clock.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    const angle = Math.atan2(clientY - centerY, clientX - centerX) * (180 / Math.PI) + 90;
+    const normalizedAngle = (angle + 360) % 360;
+
+    // Logic to move minute hand
+    minutes = Math.round(normalizedAngle / 6) % 60;
+    updateDisplay(true);
+}
+
+function stopDrag() {
+    document.onmousemove = null;
+    document.ontouchmove = null;
+}
+
+function speakTime(rate) {
+    // 1. Get the German text from the display
+    const gt = document.getElementById('german-text');
+    
+    // 2. If it's a quiz and hidden, don't speak! 
+    // Or speak to help them learn? Let's assume they only hear it when revealed.
+    if (isQuiz && !isRevealed) {
+        return; 
+    }
+
+    // 3. Clean the text (removes <span> tags)
+    const textToSpeak = gt.innerText;
+
+    // 4. Create the utterance
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    utterance.lang = 'de-DE'; // Force German accent
+    utterance.rate = rate;     // Apply the speed (1.0 or 0.6)
+    utterance.pitch = 1.0;
+
+    // 5. Optional: Find a specific German voice if available
+    const voices = window.speechSynthesis.getVoices();
+    const germanVoice = voices.find(v => v.lang.startsWith('de'));
+    if (germanVoice) utterance.voice = germanVoice;
+
+    // 6. Speak
+    window.speechSynthesis.cancel(); // Stop any current speech
+    window.speechSynthesis.speak(utterance);
 }
