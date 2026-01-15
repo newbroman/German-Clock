@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+   <!DOCTYPE html>
+<html lang="de">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>German Time Learner</title>
+    <title id="app-title">German Time Learner</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#FF3131">
     <style>
-        /* Essential Inline Styles for the Vivid Red Theme */
         :root {
             --vivid-red: #FF3131;
             --teal: #03dac6;
             --dark-bg: #121212;
+            /* German Flag Colors */
+            --germany-black: #000000;
+            --germany-red: #FF0000;
+            --germany-gold: #FFCC00;
+            --clock-face: linear-gradient(to bottom, var(--germany-black) 0%, var(--germany-black) 33.3%, var(--germany-red) 33.3%, var(--germany-red) 66.6%, var(--germany-gold) 66.6%, var(--germany-gold) 100%);
         }
+
         body {
             background-color: var(--dark-bg);
             color: white;
@@ -24,36 +32,51 @@
             margin: 0;
             touch-action: manipulation;
         }
+
         h1 { color: var(--vivid-red); margin-top: 15px; font-size: 1.4rem; }
         
-        /* 20% Smaller Clock & UI */
+        /* 20% Smaller Clock with German Flag Background */
         #clock-container {
-            width: 240px;
-            height: 240px;
-            border: 8px solid #333;
+            width: 145px; /* Compact -20% size */
+            height: 145px;
+            border: 5px solid white;
             border-radius: 50%;
             position: relative;
             margin: 15px 0;
-            background: #1e1e1e;
+            background: var(--clock-face);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            overflow: hidden;
         }
-        .hand { position: absolute; bottom: 50%; left: 50%; transform-origin: bottom; border-radius: 4px; }
-        #h-hand { width: 6px; height: 60px; background: white; z-index: 3; }
-        #m-hand { width: 4px; height: 90px; background: var(--teal); z-index: 2; }
-        #s-hand { width: 2px; height: 100px; background: var(--vivid-red); z-index: 1; }
 
-        #display-area { text-align: center; min-height: 80px; margin-bottom: 10px; }
-        #german-text { font-size: 1.4rem; color: var(--vivid-red); font-weight: bold; }
-        #english-text { font-size: 0.9rem; color: #888; margin-top: 4px; }
+        .mark {
+            background-color: white !important;
+            position: absolute;
+            width: 2px;
+            height: 8px;
+            left: 50%;
+            margin-left: -1px;
+            transform-origin: 1px 72.5px;
+            z-index: 2;
+        }
 
-        /* Compact Controls */
+        .hand { position: absolute; bottom: 50%; left: 50%; transform-origin: bottom; border-radius: 4px; box-shadow: 0 0 2px black; }
+        #h-hand { width: 4px; height: 40px; background: white; z-index: 3; }
+        #m-hand { width: 3px; height: 60px; background: var(--teal); z-index: 2; }
+        #s-hand { width: 1.5px; height: 65px; background: var(--vivid-red); z-index: 4; }
+
+        #display-area { text-align: center; min-height: 80px; }
+        #german-text { font-size: 1.3rem; color: var(--vivid-red); font-weight: bold; }
+        #english-text { font-size: 0.85rem; color: #888; }
+
         .controls { 
             display: flex; 
             flex-direction: column; 
             gap: 10px; 
             width: 90%; 
             max-width: 320px; 
-            transform: scale(0.9); /* Global 20% smaller feel */
+            transform: scale(0.9);
         }
+
         .btn-row { display: flex; justify-content: space-between; gap: 8px; }
         button {
             flex: 1;
@@ -62,7 +85,7 @@
             color: white;
             border: none;
             border-radius: 6px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         button:active { background: var(--vivid-red); }
         
@@ -70,39 +93,48 @@
             background: transparent;
             border: 1px solid #444;
             color: var(--vivid-red);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             text-align: center;
-            width: 120px;
-            margin: 10px auto;
+            width: 100px;
+            margin: 5px auto;
             border-radius: 4px;
         }
 
-        #quiz-options {
-            display: none;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        .quiz-btn { background: #2a2a2a; border: 1px solid #444; padding: 12px 5px; font-size: 0.8rem; }
+        /* Grammar Highlights */
+        .cardinal-num { color: #3498db; font-weight: bold; }
+        .nom-case { color: #ff9f43; font-weight: bold; }
     </style>
 </head>
 <body onload="init()">
 
-    <h1>German Time Learner</h1>
+    <h1 id="app-title">Deutsch Zeit-Trainer</h1>
 
     <div id="clock-container" onmousedown="startDrag(event)" ontouchstart="startDrag(event)">
+        <div class="mark" style="transform: rotate(0deg)"></div>
+        <div class="mark" style="transform: rotate(30deg)"></div>
+        <div class="mark" style="transform: rotate(60deg)"></div>
+        <div class="mark" style="transform: rotate(90deg)"></div>
+        <div class="mark" style="transform: rotate(120deg)"></div>
+        <div class="mark" style="transform: rotate(150deg)"></div>
+        <div class="mark" style="transform: rotate(180deg)"></div>
+        <div class="mark" style="transform: rotate(210deg)"></div>
+        <div class="mark" style="transform: rotate(240deg)"></div>
+        <div class="mark" style="transform: rotate(270deg)"></div>
+        <div class="mark" style="transform: rotate(300deg)"></div>
+        <div class="mark" style="transform: rotate(330deg)"></div>
+
         <div id="h-hand" class="hand"></div>
         <div id="m-hand" class="hand"></div>
         <div id="s-hand" class="hand"></div>
-        <div style="position: absolute; top: 50%; left: 50%; width: 12px; height: 12px; background: #333; border-radius: 50%; transform: translate(-50%, -50%); z-index: 10;"></div>
+        <div style="position: absolute; top: 50%; left: 50%; width: 8px; height: 8px; background: white; border-radius: 50%; transform: translate(-50%, -50%); z-index: 10;"></div>
     </div>
 
     <div id="display-area">
-        <div id="german-text">Lade...</div>
+        <div id="german-text">Wie sagt man?</div>
         <div id="english-text">Loading...</div>
     </div>
 
-    <input type="text" id="time-input-display" value="12:00" oninput="manualTime(this.value)">
+    <input type="text" id="time-input-display" value="12:00" readonly>
 
     <div class="controls">
         <div class="btn-row">
@@ -111,23 +143,20 @@
         </div>
 
         <div class="btn-row">
-            <button onclick="setRealTime()">Real Time</button>
-            <button onclick="rollTime()">Random Time</button>
+            <button id="btn-lang" onclick="toggleLang()">EN/DE</button>
+            <button id="btn-real" onclick="setRealTime()">Real Time</button>
+            <button id="btn-random" onclick="rollTime()">Random</button>
         </div>
 
         <button id="quiz-toggle" onclick="toggleQuiz()" style="border: 1px solid var(--teal);">How do you say?</button>
 
-        <div id="quiz-options"></div>
+        <div class="btn-row">
+            <button id="btn-listen" onclick="speakTime(1.0)">Listen</button>
+            <button id="btn-slow" onclick="speakTime(0.6)">Slow</button>
+            <button onclick="showHelp()">?</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
-    <script>
-        // Register Service Worker for Offline Use
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js')
-            .then(() => console.log("Offline Mode Ready"))
-            .catch(err => console.log("SW Error", err));
-        }
-    </script>
 </body>
 </html>
