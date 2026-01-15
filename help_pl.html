@@ -1,0 +1,110 @@
+<style>
+    #help-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 0.9rem;
+        text-align: center;
+    }
+
+    #help-content th {
+        background-color: transparent;
+        border-bottom: 2px solid #dee2e6;
+        padding: 12px;
+        text-align: center;
+    }
+
+    #help-content td {
+        padding: 10px;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+        text-align: center;
+    }
+
+    /* Grammar Colors */
+    .cardinal-num { color: #3498db; font-weight: bold; } /* Blue */
+    .nom-case { color: var(--nom-color); } /* Orange */
+    .gen-case { color: var(--gen-color); } /* Purple */
+</style>
+
+<div class="help-sect">
+    <h3>📱 Instructions</h3>
+    <ul>
+        <li><b>Drag the Hands:</b> Move the clock hands to change the time.</li>
+        <li><b>Manual Entry:</b> Type a time (e.g., 14:20) in the text box.</li>
+        <li><b>EN/PL:</b> Change the interface and help language.</li>
+        <li><b>Phon:</b> Enable/disable the phonetic transcription.</li>
+        <li><b>Quiz Mode:</b> Test yourself! Choose the correct Polish phrase for the time on the clock. Buttons change color: <span style="color:#28a745">Green</span> (correct), <span style="color:#dc3545">Red</span> (wrong).</li>
+    </ul>
+</div>
+
+<div class="help-sect">
+    <h3>👔 <span class="nom-case">Formal</span> Grammar (24h)</h3>
+    <table class="help-table">
+        <thead>
+            <tr>
+                <th>Part</th>
+                <th>Number Type</th>
+                <th>Case</th>
+                <th>Example</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="nom-case">Hour</span></td>
+                <td><b class="nom-case">Ordinal</b></td>
+                <td class="nom-case">Nominative (Orange)</td>
+                <td><span class="nom-case">Godzina</span> <span class="nom-case">siedemnasta</span></td>
+            </tr>
+            <tr>
+                <td><span class="cardinal-num">Minute</span></td>
+                <td><b class="cardinal-num">Cardinal</b></td>
+                <td><span class="cardinal-num">Blue</span></td>
+                <td><span class="cardinal-num">dziesięć</span> (17:10)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="help-sect">
+    <h3>☕ <span class="gen-case">Casual</span> Grammar (12h)</h3>
+    <table class="help-table">
+        <thead>
+            <tr>
+                <th>Context</th>
+                <th>Number Type</th>
+                <th>Case</th>
+                <th>Example</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Full <span class="nom-case">hour</span></td>
+                <td><b class="nom-case">Ordinal</b></td>
+                <td class="nom-case">Nominative (Orange)</td>
+                <td><span class="nom-case">Czwarta</span> (4:00)</td>
+            </tr>
+            <tr>
+                <td><b class="gen-case">Po</b> (Past)</td>
+                <td><b class="nom-case"</b></td>
+                <td class="gen-case">Genitive (Purple)</td>
+                <td><span class="cardinal-num">pięć</span> <span class="gen-case">po</span> <span class="gen-case">czwartej</span> (4:05)</td>
+            </tr>
+            <tr>
+                <td><b class="gen-case">Wpół do</b> (Half to)</td>
+                <td><b class="nom-case"></b></td>
+                <td class="gen-case">Genitive (Purple)</td>
+                <td><span class="gen-case">wpół do</span> <span class="gen-case">piątej</span> (4:30)</td>
+            </tr>
+            <tr>
+                <td><b class="nom-case">Za</b> (To)</td>
+                <td><b class="nom-case"></b></td>
+                <td class="nom-case">Nominative (Orange)</td>
+                <td><span class="nom-case">za</span> <span class="cardinal-num">pięć</span> <span class="nom-case">piąta</span> (4:55)</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+        <small>*Note: <span class="cardinal-num">minutes</span> are always 
+        <b class="cardinal-num">cardinal</b> numbers in <span class="gen-case">casual</span> mode.</small>
+    </p>
+</div>

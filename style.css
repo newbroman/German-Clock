@@ -1,0 +1,132 @@
+/* 1. Root & Base Layout */
+:root {
+    --vivid-red: #FF3131;
+    --dark-bg: #121212;
+    --panel-bg: #1e1e1e;
+    --text-main: #ffffff;
+    --text-muted: #888888;
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: var(--text-main);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+/* 2. Titles & Text (Vivid Red) */
+#app-title {
+    color: var(--vivid-red);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+    text-shadow: 0 0 15px rgba(255, 49, 49, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#german-text {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-top: 25px;
+    min-height: 3rem;
+    text-align: center;
+}
+
+#english-text {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+/* 3. The Analog Clock */
+#clock-container {
+    width: 150px;
+    height: 150px;
+    border: 4px solid var(--vivid-red);
+    border-radius: 50%;
+    position: relative;
+    background: var(--panel-bg);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    margin: 20px 0;
+}
+
+.mark {
+    position: absolute;
+    width: 2px;
+    height: 8px;
+    background: var(--vivid-red);
+    left: 50%;
+    transform-origin: 1px 75px;
+}
+
+.hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom;
+    border-radius: 10px;
+}
+
+#h-hand { width: 4px; height: 35px; background: white; z-index: 3; }
+#m-hand { width: 3px; height: 55px; background: white; z-index: 2; }
+#s-hand { width: 1.5px; height: 60px; background: var(--vivid-red); z-index: 4; }
+
+/* 4. Digital Display & Controls (-20% Smaller) */
+#time-input-display {
+    width: 90px;             /* Compact width */
+    font-size: 1.2rem;       /* Scaled down */
+    background: #000;
+    color: var(--vivid-red);
+    border: 1px solid #444;
+    border-radius: 4px;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 20px;
+    font-family: 'Courier New', monospace;
+}
+
+.controls button, .mode-selection label {
+    font-size: 0.8rem;      /* ~20% smaller than standard 1rem */
+    padding: 6px 10px;
+}
+
+.controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+button {
+    background: #2a2a2a;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background: #383838;
+    border-color: var(--vivid-red);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* 5. Quiz Section */
+#quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 4
